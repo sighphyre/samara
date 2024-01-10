@@ -4,21 +4,6 @@ use serde::{Deserialize, Serialize};
 use unleash_types::client_features::ClientFeatures;
 use unleash_yggdrasil::{Context, EngineState};
 
-#[derive(serde::Deserialize)]
-struct Add {
-    a: u32,
-    b: u32,
-}
-#[derive(serde::Serialize)]
-struct Sum {
-    sum: u32,
-}
-
-#[plugin_fn]
-pub fn add(input: String) -> FnResult<String> {
-    Ok(input)
-}
-
 #[derive(Serialize, Deserialize)]
 struct Message<T> {
     engine_ptr: u32,
