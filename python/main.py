@@ -36,15 +36,16 @@ class YggdrasilEngine:
     def __init__(self):
         raw_data = bytes(
             open(
-                "/home/simon/dev/yggdrasil/target/wasm32-wasi/release/yggdrasilffi.wasm",
-                # "/home/simon/dev/experiments/samara/core/target/wasm32-wasi/release/core.wasm",
+                "../core/wasm/target/wasm32-wasi/release/core.wasm",
                 "rb",
             ).read()
         )
         manifest = {"wasm": [{"data": raw_data}]}
         self.plugin = extism.Plugin(manifest, wasi=True)
         self.plugin.call("new_engine", [])
-        # self.ptr = int.from_bytes(self.plugin.call("new_engine", []), "little")
+
+        pointer_bytes = self.plugin.call("new_engine", [])
+        self.ptr = int.from_bytes(pointer_bytes, "little")
 
     def is_enabled(self, name, context):
         message = {"engine_ptr": self.ptr, "message": name}
