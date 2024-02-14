@@ -32,7 +32,7 @@ class Engine
     attr_accessor :engine_ptr
 
     def initialize
-        manifest = Extism::Manifest.from_path "../core/wasm/target/wasm32-wasi/release/core.wasm"
+        manifest = Extism::Manifest.from_path "/home/simon/dev/experiments/samara/ruby/core.wasm"
         @plugin = Extism::Plugin.new(manifest, wasi: true)
         @custom_strategy_handler = CustomStrategyHandler.new
 
